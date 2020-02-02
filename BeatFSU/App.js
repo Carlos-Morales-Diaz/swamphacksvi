@@ -43,7 +43,7 @@ export default class Counter extends React.Component {
                                                   this.state.spinValue,
                                                   {
                                                     toValue: 1,
-                                                    duration: 20,
+                                                    duration: 100,
                                                     easing: Easing.linear,
                                                     useNativeDriver: true
                                                   }
@@ -52,7 +52,7 @@ export default class Counter extends React.Component {
                                                     this.state.spinValue,
                                                     {
                                                       toValue: 0,
-                                                      duration: 20,
+                                                      duration: 100,
                                                       easing: Easing.linear,
                                                       useNativeDriver: true
                                                     }
@@ -73,7 +73,7 @@ export default class Counter extends React.Component {
                                                                               })
                                     }]
                     } }
-            source={require('./Images/hammer.jpg')} />
+            source={require('./Images/tomohawk.png')} />
 
       </View>
     );
