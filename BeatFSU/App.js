@@ -11,7 +11,9 @@ import {
   Animated,
   Easing,
   ImageBackground,
+  Alert,
 } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 import { Audio } from 'expo-av';
 
 
@@ -25,8 +27,16 @@ export default class Counter extends React.Component {
       spinValue: new Animated.Value(0),
       ongoingAnimation: false,
       soundLoaded: true,
+      timeLimit: 30,
+      restart: 0,
     }
   }
+  restartGame() {
+    this.setState( (prevState) => {
+      return {
+        counter: 0,
+        restart: prevState.restart + 1,
+      } });}
   render() {
     return ( 
       <View style={styles.Container}>
@@ -94,10 +104,32 @@ export default class Counter extends React.Component {
             }}
           source={require('./Images/tomahawk.png')} />
           
-        <View>
-          <Image source={require('./Images/cute_gator.png')} style={styles.Gator} />
-        </View>
+          <View>
+            <Image source={require('./Images/cute_gator.png')} style={styles.Gator} />
+          </View>
         </ImageBackground>
+
+        <CountDown
+          key = {this.restart}
+          style = {styles.CountdownStyle}
+          until={this.state.timeLimit}
+          size={30}
+          digitStyle={{backgroundColor: 'black'}}
+          digitTxtStyle={{color: 'gold'}}
+          timeToShow={['S']}
+          timeLabels={{s: 'SS'}}
+          onFinish={() => {
+             return(
+            <Button onPress = { () => {
+              Alert.alert ( 'Title', 'Msg',
+              [
+                {text: 'Okay',
+                onPress: () => { this.restartGame(); }
+                }
+              ]);
+            }}
+            />); } } />
+
       </View>
 
     );
@@ -107,7 +139,7 @@ export default class Counter extends React.Component {
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   Background: {
     flex: 1,
@@ -121,10 +153,11 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   CounterStyle: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    fontSize: 24,
+    color: 'black',
     lineHeight: 24,
     textAlign: 'center',
+    marginTop: 100,
   },
   BigButton: {
     marginLeft: 100,
@@ -133,5 +166,8 @@ const styles = StyleSheet.create({
   CounterContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
+  },
+  CountdownStyle: {
+    marginTop: 300,
   },
 });
