@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 
-class Counter extends React.Component {
+export default class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,13 +26,8 @@ class Counter extends React.Component {
           <Text>{this.state.counter}</Text>
         </Text>
 
-        <TouchableOpacity onPress = { () =>
-                                    { this.setState( (prevState) =>
-                                                        {return { counter: prevState.counter + 1} } )
-                                    }} >
-
+        <TouchableOpacity onPress = { () => { this.setState( (prevState) => {return { counter: prevState.counter + 1} } )}} >
           <Image source={require('./Images/fsu.png')} style={styles.BigButton}/>
-
         </TouchableOpacity>
       </View>
     );
