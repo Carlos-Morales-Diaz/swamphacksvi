@@ -11,23 +11,29 @@ import {
 } from 'react-native';
 
 class Counter extends React.Component {
-  state = {
-    counter: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0
+    }
   }
 
   render() {
-    const {counter} = this.state
     return (
       <View style = {styles.Container}>
-      <Text style = {styles.CounterStyle}>
-      {"Whacks: " + counter}
-      </Text>
+        <Text style = {styles.CounterStyle}>
+          <Text>Whacks: </Text>
+          <Text>{this.state.counter}</Text>
+        </Text>
 
-      <Button onPress = {() => {this.setState(prevState => ({ counter: prevState.counter + 1}))}} >
-      <TouchableOpacity style = {styles.BigButton}>
-      <Image source={require('images/fsu.png')} style={styles.BigButton}/>
-      </TouchableOpacity>
-      </Button>
+        <TouchableOpacity onPress = { () =>
+                                    { this.setState( (prevState) =>
+                                                        {return { counter: prevState.counter + 1} } )
+                                    }} >
+
+          <Image source={require('./Images/fsu.png')} style={styles.BigButton}/>
+
+        </TouchableOpacity>
       </View>
     );
   }
@@ -39,11 +45,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   CounterStyle: {
-    alignItems: 'center',
-    marginTop: 50,
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 24,
+    textAlign: 'center',
   },
   BigButton: {
     alignItems: 'center',
     marginTop: 200,
   },
+  CounterContainer: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+  }
 });
