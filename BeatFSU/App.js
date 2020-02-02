@@ -10,6 +10,7 @@ import {
   View,
   Animated,
   Easing,
+  Alert,
 } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
@@ -19,8 +20,19 @@ export default class Counter extends React.Component {
     this.state = {
       counter: 0,
       spinValue: new Animated.Value(0),
-      ongoingAnimation: false
+      ongoingAnimation: false,
+      timeLimit: 30,
+      restart: 0,
     }
+  }
+
+  restartGame() {
+    this.setState( (prevState) => {
+      return {
+        counter: 0,
+        restart: prevState.restart + 1,
+      }
+    });
   }
 
   render() {
@@ -86,23 +98,32 @@ export default class Counter extends React.Component {
               })
             }]
           }}
-          
-          source={require('./Images/tomahawk.png')} />
-          <CountDown style = {styles.CountdownStyle}
-          until={10}
-          size={30}
-          digitStyle={{backgroundColor: 'black'}}
-          digitTxtStyle={{color: 'gold'}}
-          timeToShow={['S']}
-          timeLabels={{s: 'SS'}}
-          onFinish={() => {
-            alert('Final Whacks: ' + this.state.counter),
-            this.state.counter = 0;
-          }
-        }
-          />
-          </View>
 
+          source={require('./Images/tomahawk.png')} />
+
+          //new game
+        //   <CountDown
+        //   key = {this.restart}
+        //   style = {styles.CountdownStyle}
+        //   until={this.state.timeLimit}
+        //   size={30}
+        //   digitStyle={{backgroundColor: 'black'}}
+        //   digitTxtStyle={{color: 'gold'}}
+        //   timeToShow={['S']}
+        //   timeLabels={{s: 'SS'}}
+        //   onFinish={() => {
+        //     // return(
+        //     <Button onPress = { () => {
+        //       Alert.alert ( 'Title', 'Msg',
+        //       [
+        //         {text: 'Okay',
+        //         onPress: () => { this.restartGame(); }
+        //       }
+        //     ]);
+        //   }}
+        //   />
+        // />
+        </View>
         );
       }
     }
