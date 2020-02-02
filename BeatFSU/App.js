@@ -43,7 +43,7 @@ export default class Counter extends React.Component {
                                                   this.state.spinValue,
                                                   {
                                                     toValue: 1,
-                                                    duration: 3000,
+                                                    duration: 20,
                                                     easing: Easing.linear,
                                                     useNativeDriver: true
                                                   }
@@ -52,7 +52,7 @@ export default class Counter extends React.Component {
                                                     this.state.spinValue,
                                                     {
                                                       toValue: 0,
-                                                      duration: 3000,
+                                                      duration: 20,
                                                       easing: Easing.linear,
                                                       useNativeDriver: true
                                                     }
