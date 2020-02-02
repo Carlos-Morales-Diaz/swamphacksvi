@@ -18,7 +18,8 @@ import { Audio } from 'expo-av';
 
 
 const soundObject = new Audio.Sound();
-const load = soundObject.loadAsync(require('./Sounds/punch.mp3'));
+soundObject.loadAsync(require('./Sounds/punch.mp3'));
+
 export default class Counter extends React.Component {
   constructor(props) {
     super(props);
