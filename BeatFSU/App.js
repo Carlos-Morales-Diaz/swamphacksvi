@@ -32,15 +32,21 @@ export default class Counter extends React.Component {
       restart: 0,
     }
   }
+  
   restartGame() {
-    this.setState( (prevState) => {
+    this.setState( () => {
       return {
         counter: 0,
-        restart: prevState.restart + 1,
-      } });}
+        timeLimit: 30,
+        //restart: prevState.restart + 1,
+      } 
+
+
+    });}
+
   render() {
     return ( 
-      <View style={styles.Container}>
+      <View style={styles.Container}>              
         <ImageBackground source={require('./Images/background.png')} style={styles.Background}>
 
         <Text style={styles.CounterStyle}>
@@ -108,7 +114,6 @@ export default class Counter extends React.Component {
           <View>
             <Image source={require('./Images/cute_gator.png')} style={styles.Gator} />
           </View>
-        </ImageBackground>
 
         <CountDown
           key = {this.restart}
@@ -120,19 +125,16 @@ export default class Counter extends React.Component {
           timeToShow={['S']}
           timeLabels={{s: 'SS'}}
           onFinish={() => {
-             return(
-            <Button onPress = { () => {
-              Alert.alert ( 'Title', 'Msg',
+
+            Alert.alert ( 'Finished', 'Whacks: ' + this.state.counter,
               [
-                {text: 'Okay',
+                {text: 'New Game',
                 onPress: () => { this.restartGame(); }
                 }
               ]);
-            }}
-            />); } } />
-
+            } } />
+        </ImageBackground>
       </View>
-
     );
   }
 }
@@ -155,10 +157,10 @@ const styles = StyleSheet.create({
   },
   CounterStyle: {
     fontSize: 24,
-    color: 'black',
+    color: 'white',
     lineHeight: 24,
     textAlign: 'center',
-    marginTop: 100,
+    marginTop: 120,
   },
   BigButton: {
     marginLeft: 100,
@@ -169,6 +171,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
   },
   CountdownStyle: {
-    marginTop: 300,
+    marginTop: 250,
   },
 });
