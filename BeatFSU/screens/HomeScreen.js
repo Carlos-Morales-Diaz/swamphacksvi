@@ -6,11 +6,18 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Button,
   TouchableOpacity,
   View,
 } from 'react-native';
 
+let x = 0;
+
 import { MonoText } from '../components/StyledText';
+
+function Separator() {
+  return <View style={styles.separator} />;
+}
 
 export default function HomeScreen() {
   return (
@@ -18,15 +25,26 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
+
+        <View style={styles.getStartedContainer}>
+
+          <Text style={styles.getStartedText}>
+            Value of x: { getX() }
+          </Text>
+
+        </View>
+
         <View style={styles.welcomeContainer}>
+        <TouchableOpacity onPress={ handlePress }>
           <Image
             source={
               __DEV__
-                ? require('../assets/images/robot-dev.png')
+                ? require('../assets/images/cute_gator.png')
                 : require('../assets/images/robot-prod.png')
             }
             style={styles.welcomeImage}
           />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.getStartedContainer}>
@@ -51,6 +69,18 @@ export default function HomeScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.container}>
+        <Text style= {styles.getStartedText}>
+          The title and onPress handler are required. It is recommended to set
+          accessibilityLabel to help make your app usable by everyone.
+        </Text>
+        <Button
+          title="Press me"
+          onPress= {handleHelpPress}
+        />
+      </View>
+
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -65,6 +95,7 @@ export default function HomeScreen() {
           </MonoText>
         </View>
       </View>
+
     </View>
   );
 }
@@ -108,6 +139,15 @@ function handleHelpPress() {
   );
 }
 
+function handlePress() {
+  x = x + 1;
+  alert(x);
+}
+
+function getX() {
+  return " " + x;
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -125,7 +165,7 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 200,
     marginBottom: 20,
   },
   welcomeImage: {
